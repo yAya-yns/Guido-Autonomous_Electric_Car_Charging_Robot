@@ -1,0 +1,5 @@
+a = (1,2)
+print(a)
+print(type(a))
+print(a[0])
+print(list(a))
