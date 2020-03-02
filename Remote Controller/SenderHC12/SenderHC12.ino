@@ -7,14 +7,14 @@
 #include <Wire.h>
 SoftwareSerial HC12(10, 11);
 
-  int lr;//left and right on Left Joystick
-  int bf;//back and front on Left Joystick
-  int rotate;//left and right on Right Joystick
-  int nothing;//not being used yet
-  int jSWleft;//button on the left joystick
-  int jSWright;//button on the right joystick
-  int btnLeft;//small button on the left
-  int btnRight;//small button on the right
+int lr;//left and right on Left Joystick
+int bf;//back and front on Left Joystick
+int rotate;//left and right on Right Joystick
+int nothing;//not being used yet,up and down on the right joystick
+int jSWleft;//button on the left joystick
+int jSWright;//button on the right joystick
+int btnLeft;//small button on the left
+int btnRight;//small button on the right
   
 
 void setup()
