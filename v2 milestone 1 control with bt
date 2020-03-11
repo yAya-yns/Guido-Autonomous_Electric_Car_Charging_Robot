@@ -1,0 +1,191 @@
+int stepPinTower = 3;
+int dirPinTower = 2;
+
+int stepPinFL = 5;
+int dirPinFL = 4;
+
+int stepPinFR = 11;
+int dirPinFR = 10;
+
+int stepPinBL = 7;
+int dirPinBL = 6;
+
+int stepPinBR = 9;
+int dirPinBR = 8;
+
+int turningPeriod = 200;
+
+int M0 = 2;
+int M1 = 3;
+
+
+// #include <SoftwareSerial.h>
+//Pin 10 (RX) Sensor Uno  Pin 1 (TX) Rover Uno
+//Pin 11 (TX) Sensor Uno  Pin 0 (RX) Rover Uno.
+
+//SoftwareSerial mySerial(10, 11); // RX | TX
+char val = 0; //holds ascii from serial line
+
+void setup() {   // Sets the two pins as Outputs
+  Serial.begin(9600);
+  // mySerial.begin(9600);
+
+  pinMode(stepPinFR, OUTPUT);
+  pinMode(dirPinFR, OUTPUT);
+
+  pinMode(stepPinFL, OUTPUT);
+  pinMode(dirPinFL, OUTPUT);
+
+  pinMode(stepPinBL, OUTPUT);
+  pinMode(dirPinBL, OUTPUT);
+
+  pinMode(stepPinBR, OUTPUT);
+  pinMode(dirPinBR, OUTPUT);
+
+  pinMode(stepPinTower, OUTPUT);
+  pinMode(dirPinTower, OUTPUT);
+
+  pinMode(M0,OUTPUT);
+  pinMode(M1,OUTPUT);
+  digitalWrite(M0, HIGH);
+  digitalWrite(M1, LOW);
+  
+}
+
+void loop() {
+  if (Serial.available())
+  {
+    val = Serial.read();
+    Serial.println(val);
+    if (val == 'f') {
+      Serial.println("forward");
+      forward();
+      
+    }
+
+    if (val == 'b') {
+      Serial.println("backward");
+      backward();
+      
+    }
+
+     if (val == 'l') {
+      Serial.println("turnLeft");
+      turnLeft();
+      
+    }
+
+     if (val == 'r') {
+      Serial.println("turnRight");
+      turnRight();
+    }
+
+    if (val == 'u') {
+      Serial.println("upward");
+      upward();
+    }
+    if (val == 'd') {
+      Serial.println("downward");
+      downward();
+    }
+  }
+}
+void backward() {
+  digitalWrite(dirPinFL, HIGH);
+  digitalWrite(dirPinFR, LOW);
+  digitalWrite(dirPinBL, HIGH);  
+  digitalWrite(dirPinBR, LOW);
+  for (int x = 0; x < turningPeriod; x++) {
+    digitalWrite(stepPinBR, HIGH);
+    digitalWrite(stepPinBL, HIGH);
+    digitalWrite(stepPinFL, HIGH);
+    digitalWrite(stepPinFR, HIGH);
+      delayMicroseconds(1800);
+      digitalWrite(stepPinBR, LOW);
+      digitalWrite(stepPinBL, LOW);
+      digitalWrite(stepPinFL, LOW);
+      digitalWrite(stepPinFR, LOW);
+      delayMicroseconds(1800);
+  }
+}
+
+void forward() {
+  digitalWrite(dirPinFL, LOW);
+  digitalWrite(dirPinFR, HIGH);
+  digitalWrite(dirPinBL, LOW);  
+  digitalWrite(dirPinBR, HIGH);
+  for (int x = 0; x < turningPeriod; x++) {
+    digitalWrite(stepPinBR, HIGH);
+    digitalWrite(stepPinBL, HIGH);
+    digitalWrite(stepPinFL, HIGH);
+    digitalWrite(stepPinFR, HIGH);
+    delayMicroseconds(1800);
+    digitalWrite(stepPinBR, LOW);
+    digitalWrite(stepPinBL, LOW);
+    digitalWrite(stepPinFL, LOW);
+    digitalWrite(stepPinFR, LOW);
+    delayMicroseconds(1800);
+  }
+}
+
+
+void turnRight() {
+  digitalWrite(dirPinFL, LOW);
+  digitalWrite(dirPinFR, LOW);
+  digitalWrite(dirPinBL, LOW);  
+  digitalWrite(dirPinBR, LOW);
+  for (int x = 0; x < turningPeriod; x++) {
+    digitalWrite(stepPinBR, HIGH);
+    digitalWrite(stepPinBL, HIGH);
+    digitalWrite(stepPinFL, HIGH);
+    digitalWrite(stepPinFR, HIGH);
+    delayMicroseconds(1800);
+    digitalWrite(stepPinBR, LOW);
+    digitalWrite(stepPinBL, LOW);
+    digitalWrite(stepPinFL, LOW);
+    digitalWrite(stepPinFR, LOW);
+    delayMicroseconds(1800);
+  }
+}
+
+
+void turnLeft() {
+  digitalWrite(dirPinFL, HIGH);
+  digitalWrite(dirPinFR, HIGH);
+  digitalWrite(dirPinBL, HIGH);  
+  digitalWrite(dirPinBR, HIGH);
+  for (int x = 0; x < turningPeriod; x++) {
+    digitalWrite(stepPinBR, HIGH);
+    digitalWrite(stepPinBL, HIGH);
+    digitalWrite(stepPinFL, HIGH);
+    digitalWrite(stepPinFR, HIGH);
+    delayMicroseconds(1800);
+    digitalWrite(stepPinBR, LOW);
+    digitalWrite(stepPinBL, LOW);
+    digitalWrite(stepPinFL, LOW);
+    digitalWrite(stepPinFR, LOW);
+    delayMicroseconds(1800);
+  }
+}
+
+void upward(){
+  digitalWrite(dirPinTower, HIGH);
+  for (int x = 0; x < turningPeriod; x++) {
+    digitalWrite(stepPinTower, HIGH);
+    delayMicroseconds(1000);
+    digitalWrite(stepPinTower, LOW);
+    delayMicroseconds(1000);
+  }
+  delay(1000); // One second delay
+}
+
+void downward(){
+  digitalWrite(dirPinTower, LOW);
+  for (int x = 0; x < turningPeriod; x++) {
+    digitalWrite(stepPinTower, HIGH);
+    delayMicroseconds(1000);
+    digitalWrite(stepPinTower, LOW);
+    delayMicroseconds(1000);
+  }
+  delay(1000); // One second delay
+}
