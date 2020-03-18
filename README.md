@@ -10,20 +10,20 @@ This repo contains 4 main sections:
   3. bootingCode [Folder]
   4. Remote Controller [Folder]
   
-  1. For computer_vision folder:
+  For computer_vision folder:
     - OpenCVLearning [Folder] contains practices of detecting perfect circles and locate their centers
     - rough_locating [Folder] contains code of detecting the charging port roughly.
       - there is a file named "Demo of Finding the Circle on the port.mp4" that demonstrate the result
   
-  2. For motor_control_arduino folder:
+  For motor_control_arduino folder:
     - there are codes used for milestone 1 to control the rover manually
     - these code will be transferred to python code that will be run by a Raspberry Pi in the future
     
-  3. For bootingCode folder:
+  For bootingCode folder:
     - this folder contains a bash code to run a python code once a raspberry Pi is powered
     - this is to ease the setup process for the charging robot
   
-  4. For Remote Controller Folder:
+  For Remote Controller Folder:
     - this folder contains the code for controlling rover via HC12 module (was not used at the end)
     
   
